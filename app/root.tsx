@@ -26,19 +26,19 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const {init} = usePuterStore();
+  const { init } = usePuterStore();
   useEffect(() => {
     init();
   }, [init]);
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
       </head>
-      <body suppressHydrationWarning>
+      <body>
         <script src="https://js.puter.com/v2/"></script>
 
         {children}

@@ -117,10 +117,8 @@ export const usePuterStore = create<PuterStore>((set, get) => {
   };
 
   const checkAuthStatus = async (): Promise<boolean> => {
-    console.log("checkAuthStatus started");
     const puter = getPuter();
     if (!puter) {
-      console.log("checkAuthStatus: puter not available");
       setError("Puter.js not available");
       return false;
     }
@@ -128,9 +126,7 @@ export const usePuterStore = create<PuterStore>((set, get) => {
     set({ isLoading: true, error: null });
 
     try {
-      console.log("checkAuthStatus: calling puter.auth.isSignedIn()");
       const isSignedIn = await puter.auth.isSignedIn();
-      console.log("checkAuthStatus: isSignedIn =", isSignedIn);
       if (isSignedIn) {
         const user = await puter.auth.getUser();
         set({
@@ -162,7 +158,6 @@ export const usePuterStore = create<PuterStore>((set, get) => {
         return false;
       }
     } catch (err) {
-      console.log("checkAuthStatus: error =", err);
       const msg =
         err instanceof Error ? err.message : "Failed to check auth status";
       setError(msg);
@@ -171,14 +166,14 @@ export const usePuterStore = create<PuterStore>((set, get) => {
   };
 
   const signIn = async (): Promise<void> => {
-    // ... skipping signIn/signOut for brevity, assuming only init issues
     const puter = getPuter();
-    // ...
     if (!puter) {
       setError("Puter.js not available");
       return;
     }
+
     set({ isLoading: true, error: null });
+
     try {
       await puter.auth.signIn();
       await checkAuthStatus();
@@ -194,7 +189,9 @@ export const usePuterStore = create<PuterStore>((set, get) => {
       setError("Puter.js not available");
       return;
     }
+
     set({ isLoading: true, error: null });
+
     try {
       await puter.auth.signOut();
       set({
@@ -221,7 +218,9 @@ export const usePuterStore = create<PuterStore>((set, get) => {
       setError("Puter.js not available");
       return;
     }
+
     set({ isLoading: true, error: null });
+
     try {
       const user = await puter.auth.getUser();
       set({
@@ -242,21 +241,16 @@ export const usePuterStore = create<PuterStore>((set, get) => {
     }
   };
 
-
   const init = (): void => {
-    console.log("init() called");
     const puter = getPuter();
     if (puter) {
-      console.log("init: puter already loaded");
       set({ puterReady: true });
       checkAuthStatus();
       return;
     }
 
-    console.log("init: waiting for puter to load...");
     const interval = setInterval(() => {
       if (getPuter()) {
-        console.log("init: puter loaded via interval!");
         clearInterval(interval);
         set({ puterReady: true });
         checkAuthStatus();
@@ -266,7 +260,6 @@ export const usePuterStore = create<PuterStore>((set, get) => {
     setTimeout(() => {
       clearInterval(interval);
       if (!getPuter()) {
-        console.log("init: puter timeout!");
         setError("Puter.js failed to load within 10 seconds");
       }
     }, 10000);
@@ -356,8 +349,7 @@ export const usePuterStore = create<PuterStore>((set, get) => {
             },
           ],
         },
-      ],
-      { model: "claude-sonnet-4" },
+      ]
     ) as Promise<AIResponse | undefined>;
   };
 
