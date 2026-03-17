@@ -209,7 +209,7 @@ export default function ResumeFeedback() {
             {/* Top Navigation Bar style from screenshot */}
             <div className="border-b border-slate-200/80 px-4 py-3 flex items-center justify-between bg-white w-full">
                 <div className="flex items-center gap-3 text-[13px]">
-                    <button onClick={() => navigate('/upload')} className="flex items-center gap-1.5 text-slate-700 hover:text-slate-900 font-semibold transition-colors border border-slate-200 rounded-md px-3 py-1.5 shadow-sm hover:bg-slate-50 bg-white">
+                    <button onClick={() => navigate('/')} className="flex items-center gap-1.5 text-slate-700 hover:text-slate-900 font-semibold transition-colors border border-slate-200 rounded-md px-3 py-1.5 shadow-sm hover:bg-slate-50 bg-white">
                         <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" /></svg>
                         Back to homepage
                     </button>
